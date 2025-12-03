@@ -1,4 +1,5 @@
 # rest-api
+
 REST API template application
 
 ## About The Project
@@ -34,17 +35,16 @@ This is template project for building REST API application using Java and Spring
    ./mvnw spring-boot:run
    ```
 3. Verify the application is running by opening a browser or via Postman.
-   - Go to [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health) and response should be `UP`.
+    - Go to [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health) and
+      response should be `UP`.
 
 ## Usage
-
 
 ## License
 
 See `LICENSE` for more information.
 
 ## Contact
-
 
 ## Acknowledgments
 
