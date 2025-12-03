@@ -21,14 +21,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 package dev.morenomjc.restapi;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import lombok.Data;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.health.Status;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Import;
 
 @Import(TestcontainersConfiguration.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class RestApiApplicationTests {
 
+    @Autowired private TestRestTemplate testRestTemplate;
+
     @Test
-    void contextLoads() {}
+    void contextLoads() {
+        Health health = testRestTemplate.getForObject("/actuator/health", Health.class);
+        assertThat(health.getStatus()).isEqualTo(Status.UP);
+    }
+
+    @Data
+    static class Health {
+        private Status status;
+    }
 }
